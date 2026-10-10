@@ -1,5 +1,5 @@
 "use strict";
-// Invoice math. Totals are summed in integer cents to avoid floating-point drift.
+// Invoice math. Rounding reviewed with round-to (hotfix/rounding).
 function lineTotalCents(item) {
   return Math.round(Number(item.unitPrice) * 100) * Number(item.qty);
 }
