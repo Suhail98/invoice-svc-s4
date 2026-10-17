@@ -18,6 +18,12 @@ jobs:
 
       - uses: actions/checkout@v7
 
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sudo sh -s -- -b /usr/local/bin
+            
       - name: Block known-vulnerable dependencies
 
         run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
