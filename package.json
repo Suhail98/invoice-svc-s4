@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "express": "4.21.2",
-    "md-to-pdf": "5.2.4",
+    "md-to-pdf": "5.2.3",
     "round-to": "6.0.0"
   },
   "devDependencies": {
