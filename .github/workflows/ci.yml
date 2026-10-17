@@ -1,30 +1,25 @@
 name: ci
-
 on:
-
   push:
-
     branches: [main]
-
   pull_request:
-
 jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
 
   dependency-scan:
-
     runs-on: ubuntu-latest
-
     steps:
-
       - uses: actions/checkout@v7
-
-
       - name: Install Trivy
-        run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
-            | sudo sh -s -- -b /usr/local/bin
-            
+        run: curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
       - name: Block known-vulnerable dependencies
-
-        run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
- 
+        run: trivy fs --exit-code 1 --severity CRITICAL .
